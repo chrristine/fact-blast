@@ -9,6 +9,8 @@ const FUN_FACT_API_SECRET = process.env.FUN_FACT_API_SECRET;
 
 
 const { client } = require('./services/twilio');
+const { db } = require('./db.js');
+
 
 app.use('/api/random', require('./services/facts'));
 
