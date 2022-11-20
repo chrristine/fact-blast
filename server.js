@@ -8,7 +8,7 @@ const port = process.env.PORT || 3001;
 const FUN_FACT_API_SECRET = process.env.FUN_FACT_API_SECRET;
 
 
-const { client } = require('./services/twilio');
+// const { client } = require('./services/twilio');
 const { db } = require('./db.js');
 
 
@@ -24,8 +24,13 @@ app.get('/express_backend', (req, res) => {
   // console.log({client});
 });
 
-
-
-
+app.get('/fact_me', (req, res) => {
+  console.log({ db })
+  res.send(db.User.create({ firstName: "Joe", phone: '4158186641' }));
+  console.log({ db })
+  
+  const users = db.User.findAll();
+  console.log("All users:", JSON.stringify(users, null, 2));
+});
 
 module.exports = router;

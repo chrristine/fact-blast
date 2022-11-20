@@ -29,14 +29,13 @@ const User = sequelize.define('User', {
     allowNull: false
   },
   phone: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   },
   daysOfWeek: {
     type: Sequelize.ARRAY(Sequelize.ENUM({
       values: dayList
-    })),
-    allowNull: false
+    }))
   },
 }, {
     freezeTableName: true
@@ -71,3 +70,12 @@ const DayOfWeek = sequelize.define('DayOfWeek', {
 
 User.hasMany(Topic);
 DayOfWeek.hasMany(User);
+
+(async () => {
+  await sequelize.sync({ force: true });
+  // Code here
+  const jane = await User.create({ firstName: "Jane", phone: '4158186641' });
+  console.log({jane})
+})();
+
+module.exports = User;
